@@ -48,7 +48,7 @@ singlePerson str = do
     let list = map (\(Entity _ y) -> userToPerson y) users
     case list of
          []     -> lift $ left err404
-         (x:xs) -> return x
+         (x:_) -> return x
 
 createPerson :: Person -> AppM Int64
 createPerson p = do
