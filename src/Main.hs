@@ -21,5 +21,4 @@ main = do
 lookupSetting :: Read a => String -> a -> IO a
 lookupSetting env def = do
     p <- lookupEnv env
-    return $ case p of Nothing -> def
-                       Just a  -> read a
+    return $ maybe def read p
