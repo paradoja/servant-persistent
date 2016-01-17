@@ -1,5 +1,6 @@
 module Main where
 
+import Control.Monad               (liftM)
 import Network.Wai.Handler.Warp    (run)
 import System.Environment          (lookupEnv)
 import Database.Persist.Postgresql (runSqlPool)
@@ -19,6 +20,4 @@ main = do
     run port $ logger $ app cfg
 
 lookupSetting :: Read a => String -> a -> IO a
-lookupSetting env def = do
-    p <- lookupEnv env
-    return $ maybe def read p
+lookupSetting env def = liftM (maybe def read) $ lookupEnv env
